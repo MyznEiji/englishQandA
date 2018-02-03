@@ -8,6 +8,5 @@ def talkAboutQuestion():
     ikutaErikaTeacher = idolTeacher.IdolTeacher("生田絵梨花")
     ikutaErikaTeacher.hello()
     # ikutaErikaTeacher.previousGrades()
-    # ikutaErikaTeacher.showQuestionsList()
-    # ikutaErikaTeacher.englishQuestionsStart()
-    ikutaErikaTeacher.writeQuestion()
+    ikutaErikaTeacher.englishQuestionsStart()
+    # ikutaErikaTeacher.writeQuestion()

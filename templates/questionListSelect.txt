@@ -1,2 +1,1 @@
-$userNameさん。今日はどの問題をやりますか？
-$userName, which question do you do?
+$idolName : $userNameさん。今日はどの問題をやりますか？
