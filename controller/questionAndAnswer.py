@@ -1,9 +1,11 @@
 """Controller for question and answer with Ikuta Erika"""
 
-from models import ikutaErika
-
+from models import idolTeacher
 
 def talkAboutQuestion():
     """Function to speak with Ikuta Erika"""
-    ikutaErikaTeacher = ikutaErika.IkutaErikaTeacher()
+    ikutaErikaTeacher = idolTeacher.IdolTeacher("生田絵梨花")
     ikutaErikaTeacher.hello()
+    ikutaErikaTeacher.previousGrades()
+    ikutaErikaTeacher.showQuestionsList()
+    ikutaErikaTeacher.englishQuestionsStart()
