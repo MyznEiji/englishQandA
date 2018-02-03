@@ -1,6 +1,9 @@
 """ Defined a idolTeacher model"""
 
 import os
+import csv
+
+import termcolor
 
 from views import console
 from models import idol
@@ -9,6 +12,10 @@ import data
 
 class IdolTeacher(idol.Idol):
     """Handle data model on Teacher."""
+
+    newLine = "\n\n"
+    line = "-" * 60
+    questionListPosts = []
 
     def __init__(self, name=""):
         super().__init__(name=name, userName="")
@@ -29,32 +36,56 @@ class IdolTeacher(idol.Idol):
     @_helloDecorator
     def showQuestionsList(self):
         """ Show current files to user."""
+
+        # dataディレクトリのファイルを全て読み込み出力
         questionsFile = os.listdir("data")
+        print(self.newLine)
         for i, file in enumerate(questionsFile):
-            print("[", i, "]", file, "の問題")
+            if not file in self.questionListPosts:
+                self.questionListPosts.append(file)
+            print("[", i, "]", file, "の問題\n")
 
     @_helloDecorator
     def chooseQuestions(self):
         """Collect user's answer from user. """
 
+        template = console.getTemplate("questionListSelect.txt", self.speakColor)
+
         while True:
-            template = console.getTemplate("question.txt", self.speakColor)
             selectedQuestion = input(template.substitute({
                 "idolName": self.name,
                 "userName": self.userName,
             }))
-            if selectedQuestion:
+            if selectedQuestion.isdigit():
+                selectedQuestion = int(selectedQuestion)
                 break
+            self.showQuestionsList()
+            print(termcolor.colored("数字で選択してください", "red"))
 
         return selectedQuestion
 
     @_helloDecorator
     def englishQuestionsStart(self):
         """Start english questions."""
+        selectedQuestionNum = self.chooseQuestions()
+        qFile = str(self.questionListPosts[selectedQuestionNum])
 
-        while True:
-            if self.chooseQuestions().isdigit():
-                break
-            self.showQuestionsList()
-            print("数字を入力してください")
-            # selectedQuestion = int(self.chooseQuestions())
+        # 選択したcsvの問題を出題する
+        with open("data/{qFile}".format(qFile=qFile), "r") as csvFile:
+            reader = csv.DictReader(csvFile)
+
+            for i, row in enumerate(reader):
+                template = console.getTemplate("question.txt", self.speakColor)
+                print(template.substitute({"qNum": i+1, "en": row["En"]}))
+
+                answer = input()
+
+                # 答えの正誤判定
+                if answer == row["Jp"]:
+                    template = console.getTemplate(
+                        "trueComment.txt", self.speakColor, "on_blue")
+                    print(template.substitute())
+                else:
+                    template = console.getTemplate(
+                        "falseComment.txt", self.speakColor, "on_red")
+                    print(template.substitute({"jp": row["Jp"]}))

@@ -2,6 +2,7 @@
 
 from models import idolTeacher
 
+
 def talkAboutQuestion():
     """Function to speak with Ikuta Erika"""
     ikutaErikaTeacher = idolTeacher.IdolTeacher("生田絵梨花")

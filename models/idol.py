@@ -7,7 +7,7 @@ class Idol(object):
     """Base model for Idol"""
 
     def __init__(self, name="", userName="",
-                 speakColor="green"):
+                 speakColor="yellow"):
         self.name = name
         self.userName = userName
         self.speakColor = speakColor

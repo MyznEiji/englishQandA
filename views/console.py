@@ -47,7 +47,7 @@ def findTemplate(tempFile):
     return tempFilePath
 
 
-def getTemplate(templateFilePath, color=None):
+def getTemplate(templateFilePath, color=None, onColor=None):
     """
         Return the path of the template.
 
@@ -64,7 +64,7 @@ def getTemplate(templateFilePath, color=None):
     with open(template, "r") as templateFile:
         contents = templateFile.read()
         contents = contents.rstrip("\n")
-        contents = "{splitter}\n{contents}\n{splitter}\n".format(
+        contents = "\n\n{splitter}\n{contents}\n{splitter}\n\n\n".format(
             contents=contents, splitter="=" * 60)
-        contents = termcolor.colored(contents, color)
+        contents = termcolor.colored(contents, color, on_color=onColor)
         return string.Template(contents)
