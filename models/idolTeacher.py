@@ -49,7 +49,8 @@ class IdolTeacher(idol.Idol):
     def chooseQuestions(self):
         """Collect user's answer from user. """
 
-        template = console.getTemplate("questionListSelect.txt", self.speakColor)
+        template = console.getTemplate(
+            "questionListSelect.txt", self.speakColor)
 
         while True:
             selectedQuestion = input(template.substitute({
@@ -76,7 +77,7 @@ class IdolTeacher(idol.Idol):
 
             for i, row in enumerate(reader):
                 template = console.getTemplate("question.txt", self.speakColor)
-                print(template.substitute({"qNum": i+1, "en": row["En"]}))
+                print(template.substitute({"qNum": i + 1, "en": row["En"]}))
 
                 answer = input()
 
@@ -89,3 +90,35 @@ class IdolTeacher(idol.Idol):
                     template = console.getTemplate(
                         "falseComment.txt", self.speakColor, "on_red")
                     print(template.substitute({"jp": row["Jp"]}))
+
+    def writeQuestion(self):
+        """Write question and answer"""
+
+        template = console.getTemplate(
+            "newFileName.txt", self.speakColor)
+        fileName = input(template.substitute())
+        with open("data/{fileName}.csv".format(fileName=fileName), "w") as csvFile:
+            fieldNames = ["En", "Jp"]
+            writer = csv.DictWriter(csvFile, fieldnames=fieldNames)
+            writer.writeheader()
+
+            while True:
+                template = console.getTemplate(
+                    "enWord.txt", self.speakColor)
+                enWord = input(template.substitute())
+
+                template = console.getTemplate(
+                    "jpWord.txt", self.speakColor)
+                jpWord = input(template.substitute())
+                writer.writerow({"En": enWord, "Jp": jpWord})
+
+                template = console.getTemplate(
+                    "continueToWrite.txt", "blue")
+                while True:
+                    yOrN = input(template.substitute())
+                    if yOrN == "y":
+                        break
+                    elif yOrN == "n":
+                        exit()
+                    else:
+                        print(termcolor.colored("入力値が正しくありません", "red"))
