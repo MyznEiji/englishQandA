@@ -1,1 +1,2 @@
 *.pyc #python bytecode cache, for some plugins.
+__pycache__
