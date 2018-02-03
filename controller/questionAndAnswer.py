@@ -7,6 +7,7 @@ def talkAboutQuestion():
     """Function to speak with Ikuta Erika"""
     ikutaErikaTeacher = idolTeacher.IdolTeacher("生田絵梨花")
     ikutaErikaTeacher.hello()
-    ikutaErikaTeacher.previousGrades()
-    ikutaErikaTeacher.showQuestionsList()
-    ikutaErikaTeacher.englishQuestionsStart()
+    # ikutaErikaTeacher.previousGrades()
+    # ikutaErikaTeacher.showQuestionsList()
+    # ikutaErikaTeacher.englishQuestionsStart()
+    ikutaErikaTeacher.writeQuestion()
