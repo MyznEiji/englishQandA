@@ -1,0 +1,2 @@
+こんにちは！私は乃木坂46の$personNameです。あなたの名前は何ですか？
+Hello, I am $personName in Nogizaka 46. What is your name?
