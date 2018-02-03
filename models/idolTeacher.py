@@ -44,7 +44,8 @@ class IdolTeacher(idol.Idol):
             if not file in self.questionListPosts:
                 self.questionListPosts.append(file)
 
-            print(termcolor.colored("[ {i} ] {file} の問題\n".format(i=i, file=file), "blue"))
+            print(termcolor.colored(
+                "[ {i} ] {file} の問題\n".format(i=i, file=file), "blue"))
 
     @_helloDecorator
     def selectedQuestions(self):
@@ -62,7 +63,6 @@ class IdolTeacher(idol.Idol):
                 "userName": self.userName,
             }))
 
-
             if not selectedQuestion.isdigit():
                 print(termcolor.colored("数字で選択してください", "red"))
                 continue
@@ -70,11 +70,8 @@ class IdolTeacher(idol.Idol):
                 print(termcolor.colored("数字を正確に入力してください", "red"))
                 continue
 
-
-
             selectedQuestion = int(selectedQuestion)
             break
-
 
         return selectedQuestion
 
@@ -90,7 +87,10 @@ class IdolTeacher(idol.Idol):
 
             for i, row in enumerate(reader):
                 template = console.getTemplate("question.txt", self.speakColor)
-                print(template.substitute({"qNum": i + 1, "en": row["En"]}))
+                print(template.substitute({
+                    "qNum": i + 1,
+                    "en": row["En"]
+                }))
 
                 answer = input()
 
@@ -98,19 +98,23 @@ class IdolTeacher(idol.Idol):
                 if answer == row["Jp"]:
                     template = console.getTemplate(
                         "trueComment.txt", self.speakColor, "on_blue")
-                    print(template.substitute())
+                    print(template.substitute({"idolName": self.name}))
                 else:
                     template = console.getTemplate(
                         "falseComment.txt", self.speakColor, "on_red")
-                    print(template.substitute({"jp": row["Jp"]}))
+                    print(template.substitute({
+                        "idolName": self.name,
+                        "jp": row["Jp"]
+                    }))
 
     def writeQuestion(self):
         """Write question and answer"""
 
         template = console.getTemplate(
             "newFileName.txt", self.speakColor)
-        fileName = input(template.substitute())
-        with open("data/{fileName}.csv".format(fileName=fileName), "w") as csvFile:
+        fileName = input(template.substitute({"idolName": self.name}))
+        with open("data/{fileName}.csv".format(fileName=fileName),
+                  "w") as csvFile:
             fieldNames = ["En", "Jp"]
             writer = csv.DictWriter(csvFile, fieldnames=fieldNames)
             writer.writeheader()
@@ -118,17 +122,21 @@ class IdolTeacher(idol.Idol):
             while True:
                 template = console.getTemplate(
                     "enWord.txt", self.speakColor)
-                enWord = input(template.substitute())
+                enWord = input(template.substitute(
+                    {"idolName": self.name}))
 
                 template = console.getTemplate(
                     "jpWord.txt", self.speakColor)
-                jpWord = input(template.substitute())
+                jpWord = input(template.substitute(
+                    {"idolName": self.name}))
+
                 writer.writerow({"En": enWord, "Jp": jpWord})
 
                 template = console.getTemplate(
                     "continueToWrite.txt", "blue")
                 while True:
-                    yOrN = input(template.substitute())
+                    yOrN = input(template.substitute(
+                        {"idolName": self.name}))
                     if yOrN == "y":
                         break
                     elif yOrN == "n":
