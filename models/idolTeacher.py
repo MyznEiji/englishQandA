@@ -119,6 +119,19 @@ class IdolTeacher(idol.Idol):
                     if yOrN == "y":
                         break
                     elif yOrN == "n":
-                        exit()
+                        self.thankYou()
                     else:
                         print(termcolor.colored("入力値が正しくありません", "red"))
+
+    @_helloDecorator
+    def thankYou(self):
+        """Show words of appreciation to users. """
+        template = console.getTemplate(
+            "goodBy.txt", self.speakColor)
+
+        print(template.substitute({
+            "idolName": self.name,
+            "userName": self.userName,
+        }))
+
+        exit()
