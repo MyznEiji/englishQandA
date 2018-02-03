@@ -43,32 +43,45 @@ class IdolTeacher(idol.Idol):
         for i, file in enumerate(questionsFile):
             if not file in self.questionListPosts:
                 self.questionListPosts.append(file)
-            print("[", i, "]", file, "の問題\n")
+
+            print(termcolor.colored("[ {i} ] {file} の問題\n".format(i=i, file=file), "blue"))
 
     @_helloDecorator
-    def chooseQuestions(self):
+    def selectedQuestions(self):
         """Collect user's answer from user. """
 
         template = console.getTemplate(
             "questionListSelect.txt", self.speakColor)
 
         while True:
+
+            self.showQuestionsList()
+
             selectedQuestion = input(template.substitute({
                 "idolName": self.name,
                 "userName": self.userName,
             }))
-            if selectedQuestion.isdigit():
-                selectedQuestion = int(selectedQuestion)
-                break
-            self.showQuestionsList()
-            print(termcolor.colored("数字で選択してください", "red"))
+
+
+            if not selectedQuestion.isdigit():
+                print(termcolor.colored("数字で選択してください", "red"))
+                continue
+            if int(selectedQuestion) > len(self.questionListPosts) - 1:
+                print(termcolor.colored("数字を正確に入力してください", "red"))
+                continue
+
+
+
+            selectedQuestion = int(selectedQuestion)
+            break
+
 
         return selectedQuestion
 
     @_helloDecorator
     def englishQuestionsStart(self):
         """Start english questions."""
-        selectedQuestionNum = self.chooseQuestions()
+        selectedQuestionNum = self.selectedQuestions()
         qFile = str(self.questionListPosts[selectedQuestionNum])
 
         # 選択したcsvの問題を出題する
