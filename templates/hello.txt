@@ -1,3 +1,2 @@
-
-こんにちは！私は乃木坂46の$idolNameです。あなたの名前は何ですか？
+こんにちは！私は乃木坂46の$idolNameです。あなたのお名前は何ですか？
 Hello, I am $idolName in Nogizaka 46. What is your name?
