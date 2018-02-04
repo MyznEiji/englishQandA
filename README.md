@@ -1,6 +1,6 @@
 # englishQandA
 
-![Badge Status](https://ci-as-a-service)
+![Python](https://img.shields.io/pypi/pyversions/Django.svg)
 
 英単語帳を作成し、一問一答形式でテスト。
 
