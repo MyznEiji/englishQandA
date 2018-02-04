@@ -1,0 +1,20 @@
+
+++++++成績発表++++++
+
+
+正答率 : $trueNum / $allNum ( $correctAnswerRate % )
+
+
+・正解だった単語
+
+  $trueAnswers
+
+
+・間違えた単語
+
+ $falseAnswers
+
+
+++++++++++++++++++
+
+$robotName: お疲れ様でした。

@@ -6,16 +6,29 @@ import termcolor
 from views import console
 from models.robotTeacher import selecter
 
-def WriteGradesOneOrZero(qFile, grades):
+
+def WriteGradesOneOrZero(qFile, grades, falseAnswers):
     """Write Grades to csv data"""
 
     # ファイル名の.csvを削除
     qFile = qFile.rstrip(".csv")
 
+    # 正答率をgradesに追加
+    allNum = len(grades)
+    trueNum = allNum - len(falseAnswers)
+    correctAnswerRate = round(trueNum / allNum * 100, 2)
+
+    grades.append(correctAnswerRate)
+
+    # 間違えた単語をgradesに追加
+    grades.append(falseAnswers)
+
     # csvに成績を書き込む
     write_fp = csv.writer(
         open("data/grades/{qFile}Grades.csv".format(qFile=qFile), "a"))
     write_fp.writerow(grades)
+
+    return correctAnswerRate
 
 
 def writeGradesBook(fileName, enPosts):
@@ -25,6 +38,8 @@ def writeGradesBook(fileName, enPosts):
     with open("data/grades/{fileName}Grades.csv"
               .format(fileName=fileName), "w") as csvFile:
         fieldNames = enPosts
+        fieldNames.append("correctAnswerRate")
+        fieldNames.append("wrongWord")
         writer = csv.DictWriter(csvFile, fieldnames=fieldNames)
         writer.writeheader()
 

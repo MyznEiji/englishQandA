@@ -99,7 +99,21 @@ class RobotTeacher(robot.Robot):
             grades)
 
         # 成績を書き込み
-        writer.WriteGradesOneOrZero(qFile, grades)
+        correctAnswerRate = writer.WriteGradesOneOrZero(qFile, grades, falseAnswers)
+
+        # 成績発表
+        template = console.getTemplate(
+            "resultAnnounce.txt", self.speakColor)
+
+        print(template.substitute({
+            "trueNum": len(trueAnswers),
+            "allNum": len(trueAnswers) + len(falseAnswers),
+            "correctAnswerRate": correctAnswerRate,
+            "trueAnswers": trueAnswers,
+            "falseAnswers": falseAnswers,
+            "robotName": self.name
+        }))
+
 
     @_helloDecorator
     def plactice(self):
