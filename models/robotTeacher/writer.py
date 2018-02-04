@@ -4,7 +4,7 @@ import csv
 import termcolor
 
 from views import console
-
+from models.robotTeacher import selecter
 
 def WriteGradesOneOrZero(qFile, grades):
     """Write Grades to csv data"""
@@ -62,19 +62,12 @@ def writeQuestion(speakColor, name, enPosts, jpPosts):
             # csvのファイルに書き込む
             writer.writerow({"En": enWord, "Jp": jpWord})
 
+            # まだ英単語を書き込むかYes or No
             template = console.getTemplate(
                 "continueToWrite.txt", "blue")
-
-            # まだ英単語を書き込むかYes or No
-            while True:
-                yOrN = input(template.substitute(
-                    {"robotName": name}))
-
-                if yOrN == "y" or yOrN == "n":
-                    break
-                print(termcolor.colored("入力値が正しくありません", "red"))
-
+            yOrN = selecter.selectedYesOrNo(name, template)
             if not yOrN == "y":
                 break
 
-        writeGradesBook(fileName, enPosts)
+    # 今回作った英単語帳の成績表のベース
+    writeGradesBook(fileName, enPosts)

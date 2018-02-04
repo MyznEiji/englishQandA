@@ -35,9 +35,23 @@ class RobotTeacher(robot.Robot):
         return wrapper
 
     @_helloDecorator
-    def previousGrades(self):
-        """Show previousGrades to the user."""
-        print("前回の成績発表")
+    def menu(self):
+
+        # メニューの表示,選択
+        menuAnswer = selecter.selectedMenu(
+            self.speakColor,
+            self.name,
+            self.userName)
+        # 選択したメニューを実行
+
+        if menuAnswer == 0:
+            return self.createQuestions()
+        elif menuAnswer == 1:
+            return self.plactice()
+        elif menuAnswer == 2:
+            return self.englishTest()
+
+
 
     @_helloDecorator
     def createQuestions(self):
@@ -53,13 +67,16 @@ class RobotTeacher(robot.Robot):
             jpPosts)
 
     @_helloDecorator
-    def englishQuestionsStart(self):
+    def englishTest(self):
         """Start english questions."""
 
         trueAnswers = {}
         falseAnswers = {}
         grades = []
         questionListPosts = []
+
+        # 前回の成績発表
+        shower.previousGrades()
 
         # 問題のリストを出力
         questionListPosts = shower.showQuestionsList(questionListPosts)
@@ -68,7 +85,6 @@ class RobotTeacher(robot.Robot):
         selectedQuestionNum = selecter.selectedQuestions(
             self.speakColor,
             self.name,
-            self.userName,
             questionListPosts)
 
         # 選択した問題を代入
@@ -86,6 +102,11 @@ class RobotTeacher(robot.Robot):
         writer.WriteGradesOneOrZero(qFile, grades)
 
     @_helloDecorator
+    def plactice(self):
+        """English words plactice"""
+        print("英単語の練習")
+
+    @_helloDecorator
     def thankYou(self):
         """Show words of appreciation to users. """
 
@@ -96,5 +117,3 @@ class RobotTeacher(robot.Robot):
             "robotName": self.name,
             "userName": self.userName,
         }))
-
-        exit()
