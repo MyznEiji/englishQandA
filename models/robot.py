@@ -4,7 +4,7 @@ from views import console
 
 
 class Robot(object):
-    """Base model for Idol"""
+    """Base model for robot"""
 
     def __init__(self, name="", userName="",
                  speakColor="yellow"):
