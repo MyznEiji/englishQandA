@@ -1,9 +1,9 @@
-""" Defined a idol model """
+""" Defined a robot model """
 
 from views import console
 
 
-class Idol(object):
+class Robot(object):
     """Base model for Idol"""
 
     def __init__(self, name="", userName="",
@@ -13,12 +13,12 @@ class Idol(object):
         self.speakColor = speakColor
 
     def hello(self):
-        """Returns words to the user that the Ikuta Erika speaks at the beginning."""
+        """Returns words to the user that the robot speaks at the beginning."""
 
         while True:
             template = console.getTemplate("hello.txt", self.speakColor)
             userName = input(template.substitute({
-                "idolName": self.name}))
+                "robotName": self.name}))
 
             if userName:
                 self.userName = userName.title()

@@ -1,1 +1,1 @@
-$idolName: まだ単語を登録する？[y/n]
+$robotName: まだ単語を登録する？[y/n]

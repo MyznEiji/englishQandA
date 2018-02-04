@@ -1,1 +1,1 @@
-$idolName: 意味を入力して。
+$robotName: 意味を入力して。

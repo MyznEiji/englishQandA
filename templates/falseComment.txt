@@ -1,2 +1,2 @@
-$idolName: 違うよ!!!
+$robotName: 違うよ!!!
 答えは : '$jp' だよ

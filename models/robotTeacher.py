@@ -1,4 +1,4 @@
-""" Defined a idolTeacher model"""
+""" Defined a robotTeacher model"""
 
 import os
 import csv
@@ -6,11 +6,11 @@ import csv
 import termcolor
 
 from views import console
-from models import idol
+from models import robot
 import data
 
 
-class IdolTeacher(idol.Idol):
+class RobotTeacher(robot.Robot):
     """Handle data model on Teacher."""
 
     newLine = "\n\n"
@@ -55,11 +55,10 @@ class IdolTeacher(idol.Idol):
             "questionListSelect.txt", self.speakColor)
 
         while True:
-
             self.showQuestionsList()
 
             selectedQuestion = input(template.substitute({
-                "idolName": self.name,
+                "robotName": self.name,
                 "userName": self.userName,
             }))
 
@@ -98,12 +97,12 @@ class IdolTeacher(idol.Idol):
                 if answer == row["Jp"]:
                     template = console.getTemplate(
                         "trueComment.txt", self.speakColor, "on_blue")
-                    print(template.substitute({"idolName": self.name}))
+                    print(template.substitute({"robotName": self.name}))
                 else:
                     template = console.getTemplate(
                         "falseComment.txt", self.speakColor, "on_red")
                     print(template.substitute({
-                        "idolName": self.name,
+                        "robotName": self.name,
                         "jp": row["Jp"]
                     }))
 
@@ -112,7 +111,7 @@ class IdolTeacher(idol.Idol):
 
         template = console.getTemplate(
             "newFileName.txt", self.speakColor)
-        fileName = input(template.substitute({"idolName": self.name}))
+        fileName = input(template.substitute({"robotName": self.name}))
         with open("data/{fileName}.csv".format(fileName=fileName),
                   "w") as csvFile:
             fieldNames = ["En", "Jp"]
@@ -123,12 +122,12 @@ class IdolTeacher(idol.Idol):
                 template = console.getTemplate(
                     "enWord.txt", self.speakColor)
                 enWord = input(template.substitute(
-                    {"idolName": self.name}))
+                    {"robotName": self.name}))
 
                 template = console.getTemplate(
                     "jpWord.txt", self.speakColor)
                 jpWord = input(template.substitute(
-                    {"idolName": self.name}))
+                    {"robotName": self.name}))
 
                 writer.writerow({"En": enWord, "Jp": jpWord})
 
@@ -136,7 +135,7 @@ class IdolTeacher(idol.Idol):
                     "continueToWrite.txt", "blue")
                 while True:
                     yOrN = input(template.substitute(
-                        {"idolName": self.name}))
+                        {"robotName": self.name}))
                     if yOrN == "y":
                         break
                     elif yOrN == "n":
@@ -147,11 +146,12 @@ class IdolTeacher(idol.Idol):
     @_helloDecorator
     def thankYou(self):
         """Show words of appreciation to users. """
+
         template = console.getTemplate(
             "goodBy.txt", self.speakColor)
 
         print(template.substitute({
-            "idolName": self.name,
+            "robotName": self.name,
             "userName": self.userName,
         }))
 

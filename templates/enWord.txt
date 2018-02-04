@@ -1,1 +1,1 @@
-$idolName: 単語を入力して。
+$robotName: 単語を入力して。

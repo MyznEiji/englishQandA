@@ -1,1 +1,1 @@
-$idolName: 正解だよ
+$robotName: 正解だよ

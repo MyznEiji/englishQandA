@@ -1,1 +1,1 @@
-$idolName: こんにちは！私は乃木坂46の$idolNameです。あなたのお名前は何ですか？
+$robotName: こんにちは！私は$robotNameです。あなたのお名前は何ですか？
