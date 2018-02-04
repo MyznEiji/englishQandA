@@ -7,7 +7,5 @@ def talkAboutQuestion():
     """Function to speak with robotTeacher"""
     teacher = robotTeacher.RobotTeacher("Robot")
     teacher.hello()
-    teacher.previousGrades()
-    teacher.createQuestions()
-    # teacher.englishQuestionsStart()
+    teacher.menu()
     teacher.thankYou()

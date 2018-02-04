@@ -20,3 +20,8 @@ def showQuestionsList(questionListPosts):
         print(termcolor.colored(
             "[ {i} ] {file} の問題\n".format(i=i, file=file), "blue"))
     return questionListPosts
+
+
+def previousGrades():
+    """Show previousGrades to the user."""
+    print("前回の成績発表")

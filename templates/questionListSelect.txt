@@ -1,1 +1,1 @@
-$robotName: $userNameさん。今日はどの問題をやりますか？
+$robotName: 今日はどの問題をやりますか？
