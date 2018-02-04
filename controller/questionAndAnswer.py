@@ -1,6 +1,6 @@
 """Controller for question and answer with Ikuta Erika"""
 
-from models import robotTeacher
+from models.robotTeacher import robotTeacher
 
 
 def talkAboutQuestion():
@@ -8,5 +8,6 @@ def talkAboutQuestion():
     teacher = robotTeacher.RobotTeacher("Robot")
     teacher.hello()
     teacher.previousGrades()
-    teacher.englishQuestionsStart()
-    teacher.writeQuestion()
+    teacher.createQuestions()
+    # teacher.englishQuestionsStart()
+    teacher.thankYou()
