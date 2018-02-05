@@ -11,8 +11,7 @@
 成績や時間を記録し、どれくらいの回数で記憶が定着するかを計算して導きだす。
 
 ***DEMO:***
-
-[![https://gyazo.com/07726a51e99a9404f7cc0985fcb9d0ef](https://i.gyazo.com/07726a51e99a9404f7cc0985fcb9d0ef.gif)](https://gyazo.com/07726a51e99a9404f7cc0985fcb9d0ef)
+[![https://gyazo.com/55a97d50f7c25d706dcacd5005dc27e8](https://i.gyazo.com/55a97d50f7c25d706dcacd5005dc27e8.gif)](https://gyazo.com/55a97d50f7c25d706dcacd5005dc27e8)
 
 
 ## Features
