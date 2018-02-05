@@ -12,6 +12,7 @@ from models.robotTeacher import shower
 from models.robotTeacher import selecter
 from models.robotTeacher import reader
 from models.robotTeacher import writer
+from models.robotTeacher import graphView
 import data
 
 
@@ -49,6 +50,34 @@ class RobotTeacher(robot.Robot):
             return self.plactice()
         elif menuAnswer == 2:
             return self.englishTest()
+        elif menuAnswer == 3:
+            # 成績を表示するメソッド
+            return self.gradesShow()
+            グラフ表示ファイル
+            showファイルで呼び出し表示する
+
+    @_helloDecorator
+    def gradesShow(self):
+        """ show grades to user """
+        """
+            成績を見たいものを表示
+            選択
+            グラフ表示
+        """
+        # 問題を表示
+        questionListPosts = shower.showQuestionsList()
+
+        # 問題の選択待ち
+        selectedQuestionNum = selecter.selectedQuestions(
+            self.speakColor,
+            self.name,
+            questionListPosts)
+
+        # 選択した問題
+        qFile = questionListPosts[selectedQuestionNum]
+
+        # グラフを表示する
+        graphView.gradesGraphView(qFile)
 
     @_helloDecorator
     def createQuestions(self):

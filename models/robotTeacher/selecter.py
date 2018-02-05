@@ -62,7 +62,7 @@ def selectedMenu(speakColor, name, userName):
             continue
         menuAnswer = int(menuAnswer)
 
-        if 0 <= menuAnswer and menuAnswer < 3:
+        if 0 <= menuAnswer and menuAnswer < 4:
             break
         print(termcolor.colored("入力値が正しくありません", "red"))
     return menuAnswer
