@@ -2,9 +2,11 @@
 
 import csv
 import termcolor
+from datetime import datetime
 
 from views import console
 from models.robotTeacher import selecter
+from models.robotTeacher import shower
 
 
 def WriteGradesOneOrZero(qFile, grades, falseAnswers):
@@ -17,11 +19,14 @@ def WriteGradesOneOrZero(qFile, grades, falseAnswers):
     allNum = len(grades)
     trueNum = allNum - len(falseAnswers)
     correctAnswerRate = round(trueNum / allNum * 100, 2)
-
     grades.append(correctAnswerRate)
 
     # 間違えた単語をgradesに追加
     grades.append(falseAnswers)
+
+    # テストした日にちを追加
+    now = datetime.now().strftime("%d/%m /%Y - %H:%M")
+    grades.append(now)
 
     # csvに成績を書き込む
     write_fp = csv.writer(
@@ -40,12 +45,15 @@ def writeGradesBook(fileName, enPosts):
         fieldNames = enPosts
         fieldNames.append("correctAnswerRate")
         fieldNames.append("wrongWord")
+        fieldNames.append("testDate")
         writer = csv.DictWriter(csvFile, fieldnames=fieldNames)
         writer.writeheader()
 
 
 def writeQuestion(speakColor, name, enPosts, jpPosts):
     """Write question and answer"""
+
+    currentFile = shower.showQuestionsList()
 
     template = console.getTemplate(
         "newFileName.txt", speakColor)
