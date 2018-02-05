@@ -21,7 +21,6 @@ class RobotTeacher(robot.Robot):
     newLine = "\n\n"
     line = "-" * 60
 
-
     def __init__(self, name=""):
         super().__init__(name=name, userName="")
 
@@ -51,8 +50,6 @@ class RobotTeacher(robot.Robot):
         elif menuAnswer == 2:
             return self.englishTest()
 
-
-
     @_helloDecorator
     def createQuestions(self):
         """Create new questions"""
@@ -76,10 +73,10 @@ class RobotTeacher(robot.Robot):
         questionListPosts = []
 
         # 前回の成績発表
-        shower.previousGrades()
+        shower.showPreviousGrades()
 
         # 問題のリストを出力
-        questionListPosts = shower.showQuestionsList(questionListPosts)
+        questionListPosts = shower.showQuestionsList()
 
         # 問題の選択待ち
         selectedQuestionNum = selecter.selectedQuestions(
@@ -99,7 +96,10 @@ class RobotTeacher(robot.Robot):
             grades)
 
         # 成績を書き込み
-        correctAnswerRate = writer.WriteGradesOneOrZero(qFile, grades, falseAnswers)
+        correctAnswerRate = writer.WriteGradesOneOrZero(
+            qFile,
+            grades,
+            falseAnswers)
 
         # 成績発表
         template = console.getTemplate(
@@ -113,7 +113,6 @@ class RobotTeacher(robot.Robot):
             "falseAnswers": falseAnswers,
             "robotName": self.name
         }))
-
 
     @_helloDecorator
     def plactice(self):
